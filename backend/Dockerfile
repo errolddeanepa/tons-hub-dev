@@ -20,7 +20,7 @@ COPY . .
 #RUN npm run build
 
 # Set the environment to production for the runtime
-#ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 # Tell the container and Render which port we will use. Render will override PORT
 # at runtime with its assigned port if necessary.
