@@ -1,6 +1,6 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils'
 
-loadEnv(process.env.NODE_ENV || 'development', process.cwd())
+loadEnv(process.env.NODE_ENV || 'production', process.cwd())
 
 module.exports = defineConfig({
   projectConfig: {
@@ -15,6 +15,11 @@ module.exports = defineConfig({
       cookieSecret: process.env.COOKIE_SECRET!,
     }
   },
+
+  admin: {
+    disable: process.env.DISABLE_MEDUSA_ADMIN === 'false',
+  },
+
   modules: [
     {
       resolve: "@medusajs/medusa/caching",

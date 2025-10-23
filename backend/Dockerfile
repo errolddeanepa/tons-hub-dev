@@ -1,16 +1,18 @@
-from node:18-alpine
+from node:20-alpine
 
 # Set the working directory to /app (recommended for Medusa)
 WORKDIR /app
 
 # Copy package files and install dependencies
-# COPY package.json yarn.lock ./
+COPY package.json ./
+
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the Medusa application
-RUN npx medusa build
+RUN npm run build
 
 # Copy the .env file to the production build directory
 # RUN cp .env.template .medusa/server/.env.production
