@@ -4,7 +4,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npx medusa build
-COPY .env .env.production
+#COPY .env .env.production
 
 #FROM node:20-slim AS runtime
 #WORKDIR /app
