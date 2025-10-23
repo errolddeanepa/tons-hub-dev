@@ -21,7 +21,9 @@ RUN cp .env.template .medusa/server/.env.production
 WORKDIR /app/.medusa/server
 
 # Install dependencies for the production build
-RUN yarn install --production --frozen-lockfile
+RUN npm install
+
+RUN npm run predeploy
 
 # Expose the Medusa server port
 
