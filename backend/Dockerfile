@@ -1,4 +1,4 @@
-from node:20-alpine
+FROM node:20-slim
 
 # Set the working directory to /app (recommended for Medusa)
 WORKDIR /app
@@ -17,11 +17,15 @@ RUN npx medusa build
 # Copy the .env file to the production build directory
 # RUN cp .env.template .medusa/server/.env.production
 
+FROM node:20-slim AS runtime
+
 # Set the working directory to the production build output
 WORKDIR /app/.medusa/server
 
+COPY package.json ./
+
 # Install dependencies for the production build
-RUN npm install
+# RUN npm install
 
 RUN npm run predeploy
 
