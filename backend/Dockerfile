@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npx medusa build
+COPY .env .env.production
 
 #FROM node:20-slim AS runtime
 #WORKDIR /app
@@ -13,7 +14,6 @@ RUN npx medusa build
 #COPY --from=builder /app/package*.json ./.medusa/server/
 WORKDIR /app/.medusa/server
 RUN npm install
-COPY .env .env.production
 ENV NODE_ENV=production
 ENV PORT=9000
 ENV HOST=0.0.0.0
