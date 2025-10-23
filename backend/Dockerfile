@@ -1,3 +1,5 @@
+from node:18-alpine
+
 # Set the working directory to /app (recommended for Medusa)
 WORKDIR /app
 
