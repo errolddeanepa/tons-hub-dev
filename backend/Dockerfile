@@ -13,7 +13,7 @@ RUN npx medusa build
 #COPY --from=builder /app/package*.json ./.medusa/server/
 WORKDIR /app/.medusa/server
 RUN npm install
-COPY /app/.env .env.production
+COPY .env .env.production
 ENV NODE_ENV=production
 ENV PORT=9000
 ENV HOST=0.0.0.0
