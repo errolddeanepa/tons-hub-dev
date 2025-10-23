@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Build the Medusa application
-RUN npm run build
+RUN npx medusa build
 
 # Copy the .env file to the production build directory
 # RUN cp .env.template .medusa/server/.env.production

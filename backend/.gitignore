@@ -1,5 +1,5 @@
 /dist
-.env
+.env*
 .DS_Store
 /uploads
 /node_modules
@@ -24,3 +24,5 @@ build
 !.yarn/versions
 
 .medusa
+
+.vscode
