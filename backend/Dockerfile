@@ -25,9 +25,9 @@ WORKDIR /app/.medusa/server
 COPY package.json ./
 
 # Install dependencies for the production build
-# RUN npm install
+RUN npm install
 
-RUN npm run predeploy
+# RUN npm run predeploy
 
 # Expose the Medusa server port
 
