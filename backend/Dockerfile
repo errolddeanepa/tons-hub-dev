@@ -15,7 +15,7 @@ COPY . .
 RUN npx medusa build
 
 # Copy the .env file to the production build directory
-RUN cp .env .medusa/server/.env.production
+RUN cp .env.template .medusa/server/.env.production
 
 # Set the working directory to the production build output
 WORKDIR /app/.medusa/server
