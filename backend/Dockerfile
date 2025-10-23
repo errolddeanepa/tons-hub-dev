@@ -1,12 +1,8 @@
-# Use Node.js v20 or later as the base image
-FROM node:20
-
 # Set the working directory to /app (recommended for Medusa)
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# COPY package.json yarn.lock ./
 
 # Copy the rest of the application code
 COPY . .
@@ -15,7 +11,7 @@ COPY . .
 RUN npx medusa build
 
 # Copy the .env file to the production build directory
-RUN cp .env.template .medusa/server/.env.production
+# RUN cp .env.template .medusa/server/.env.production
 
 # Set the working directory to the production build output
 WORKDIR /app/.medusa/server
