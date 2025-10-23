@@ -1,22 +1,30 @@
-FROM node:20-slim AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npx medusa build
-#COPY .env .env.production
+# Use Node.js v20 or later as the base image
+FROM node:20
 
-#FROM node:20-slim AS runtime
-#WORKDIR /app
-#COPY package*.json ./
-#RUN npm ci --omit=dev
-#COPY --from=builder /app/.medusa ./.medusa
-#COPY --from=builder /app/package*.json ./.medusa/server/
+# Set the working directory to /app (recommended for Medusa)
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the Medusa application
+RUN npx medusa build
+
+# Copy the .env file to the production build directory
+RUN cp .env .medusa/server/.env.production
+
+# Set the working directory to the production build output
 WORKDIR /app/.medusa/server
-RUN npm install
-ENV NODE_ENV=production
-ENV PORT=9000
-ENV HOST=0.0.0.0
+
+# Install dependencies for the production build
+RUN yarn install --production --frozen-lockfile
+
+# Expose the Medusa server port
 EXPOSE 9000
 
-CMD ["npm", "run", "start"]
+# Start the Medusa application
+CMD ["yarn", "start"]
