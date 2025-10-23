@@ -5,7 +5,7 @@ FROM node:20
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package*.json yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # Copy the rest of the application code
@@ -24,7 +24,10 @@ WORKDIR /app/.medusa/server
 RUN yarn install --production --frozen-lockfile
 
 # Expose the Medusa server port
-EXPOSE 9000
 
+ENV NODE_ENV=production
+ENV PORT=9000
+ENV HOST=0.0.0.0
+EXPOSE 9000
 # Start the Medusa application
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]
